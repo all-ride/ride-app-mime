@@ -1,0 +1,31 @@
+{
+    "dependencies": [
+        {
+            "interfaces": ["ride\\library\\mime\\MimeFactory", "ride\\application\\mime\\MimeFactory"],
+            "class": "ride\\application\\mime\\MimeFactory"
+        },
+        {
+            "interfaces": "ride\\library\\mime\\sniffer\\MimeSniffer",
+            "class": "ride\\library\\mime\\sniffer\\FinfoMimeSniffer",
+            "id": "finfo"
+        },
+        {
+            "class": "ride\\service\\MimeService",
+            "calls": [
+                {
+                    "method": "__construct",
+                    "arguments": [
+                        {
+                            "name": "mimeTypes",
+                            "type": "call",
+                            "properties": {
+                                "interface": "ride\\application\\mime\\MimeFactory",
+                                "method": "createMimeTypesFromSystem"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
