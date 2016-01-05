@@ -17,11 +17,12 @@ class MimeFactory extends LibMimeFactory {
      * @return \ride\library\mime\MimeTypes
      */
     public function createMimeTypesFromSystem(System $system) {
-        if ($system->isUnix()) {
-            return $this->createMimeTypesFromFile('/etc/mime.types');
+        $file = $system->getFileBrowser()->getFile('data/mime.types');
+        if (!$file) {
+            throw new MimeException('Could not create a MimeTypes instance: no data/mime.types file found');
         }
 
-        throw new MimeException('Could not create a MimeTypes instance: no mime.types file available');
+        return $this->createMimeTypesFromFile($file);
     }
 
 }
